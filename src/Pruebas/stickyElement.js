@@ -1,5 +1,6 @@
 import React from 'react'
 import StickyElementWithHooks from '../Components/Sticky/StickyElementHooks'
+import ToggleButton from '../Components/HamburguerMenu/ToggleButton'
 
 const Header = () => (
   <StickyElementWithHooks>
@@ -14,6 +15,7 @@ const Header = () => (
       paddingBottom: '10px',
     }}>
       Sticky Element
+      <ToggleButton />
     </div>
   </StickyElementWithHooks>
 )
