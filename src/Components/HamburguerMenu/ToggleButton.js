@@ -1,17 +1,20 @@
-import React, {useRef} from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 const ToggleButton = () => {
-  const container = useRef(null)
+
+  const [show, setShow] = useState(false)
+  const Button = show ? CloseButton : Bar
+
   const handleClick = () => {
-    container.current.classList.toggle('change')
+    setShow(!show)
   }
 
   return (
-    <Container className="container"  ref={container} onClick={handleClick}>
-      <Bar />
-      <Bar />
-      <Bar />
+    <Container onClick={handleClick}>
+      <Button />
+      <Button />
+      <Button />
     </Container>
   )
 }
@@ -27,21 +30,18 @@ const Bar = styled.div`
     border-radius: 5px;
     background-color: white;
     transition: 0.4s;
-    .change &:first-child{
-      transform: rotate(-45deg)  translate(-9px, 6px);
-    }
-    .change &:nth-child(2){
-      opacity: 0;
-    }
-    .change &:last-child{
-      transform: rotate(45deg) translate(-8px, -8px);
-    }
 `
 
-
-
-
-
-
+const CloseButton = styled(Bar)`
+  :first-child{
+    transform: rotate(-45deg)  translate(-9px, 6px);
+  }
+  :nth-child(2){
+    opacity: 0;
+  }
+  :last-child{
+    transform: rotate(45deg) translate(-8px, -8px);
+  }
+`
 
 export default ToggleButton
