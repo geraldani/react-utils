@@ -15,7 +15,7 @@ const Header = () => (
       paddingBottom: '10px',
     }}>
       Sticky Element
-      <ToggleButton color='pink' />
+      <ToggleButton color='pink' type='arrowTurn'/>
     </div>
   </StickyElementWithHooks>
 )

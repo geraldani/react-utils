@@ -1,19 +1,37 @@
 import React, { useState } from 'react'
-import { Container, Bar } from './styles'
+import { ArrowAlt, HamburgerBox, HamburgerInner, Arrow, ArrowTurn } from './styles'
 
-const ToggleButton = (props) => {
-  const styles = {
-    color: props.color || 'black',
-    size: props.size || { height: '5px', width: '35px' }
-  }
+const ToggleButton = ({ color = 'black', type = 'arrow' }) => {
   const [closeButton, setCloseButton] = useState(false)
   const handleClick = () => setCloseButton(!closeButton)
 
   return (
-    <Container onClick={handleClick}>
-      {[...Array(3)].map((elem, index) => <Bar key={index} showCloseButton={closeButton} {...styles} />)}
-    </Container>
+    <Hamburger onClick={handleClick} active={closeButton} type={type}>
+      <HamburgerBox>
+        <HamburgerInner />
+      </HamburgerBox>
+    </Hamburger>
   )
+}
+
+const Hamburger = (props) => {
+  let Wrapper
+  switch (props.type) {
+    case 'arrow':
+      Wrapper = Arrow
+      break
+    case 'arrowAlt':
+      Wrapper = ArrowAlt
+      break
+    case 'arrowTurn':
+      Wrapper = ArrowTurn
+      break
+    default:
+      Wrapper = Arrow
+      break
+  }
+  return <Wrapper {...props}>{props.children}</Wrapper>
+
 }
 
 export default ToggleButton
