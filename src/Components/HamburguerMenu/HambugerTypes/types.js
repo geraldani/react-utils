@@ -148,27 +148,21 @@ const Elastic = styled(Hamburger)`
         }
 
         &::after {
-          transform: translate3d(0, ${(hamburgerlayerspacing + hamburgerlayerheight)* -2}px, 0) rotate(-270deg);
+          transform: translate3d(0, ${(hamburgerlayerspacing + hamburgerlayerheight) * -2}px, 0) rotate(-270deg);
           transition-delay: 0.075s;
         }
     }
   `}
 `
 
-
 const Stand = styled(Hamburger)`
   ${HamburgerInner}{
-    transition: transform 0.075s 0.15s cubic-bezier(0.55, 0.055, 0.675, 0.19),
-                background-color 0s 0.075s linear;
-    
+    transition: transform 0.075s 0.15s cubic-bezier(0.55, 0.055, 0.675, 0.19), background-color 0s 0.075s linear;
     &::before {
-    transition: top 0.075s 0.075s ease-in,
-                transform 0.075s 0s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+      transition: top 0.075s 0.075s ease-in, transform 0.075s 0s cubic-bezier(0.55, 0.055, 0.675, 0.19);
     }
-    
     &::after {
-    transition: bottom 0.075s 0.075s ease-in,
-                transform 0.075s 0s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+      transition: bottom 0.075s 0.075s ease-in, transform 0.075s 0s cubic-bezier(0.55, 0.055, 0.675, 0.19);
     }
   }
   ${props => props.active && css`
@@ -195,4 +189,88 @@ const Stand = styled(Hamburger)`
       }  
   `}
 `
-export { Arrow, ArrowAlt, ArrowTurn, Slider, Spin, Elastic, Stand }
+
+const Emphatic = styled(Hamburger)`
+  overflow: hidden;
+  ${HamburgerInner}{
+    transition: background-color 0.125s 0.175s ease-in;
+    &::before {
+      left: 0;
+      transition: transform 0.125s cubic-bezier(0.6, 0.04, 0.98, 0.335),
+                top 0.05s 0.125s linear,
+                left 0.125s 0.175s ease-in;
+    }
+    &::after {
+      top: ${hamburgerlayerheight + hamburgerlayerspacing}px;
+      right: 0;
+      transition: transform 0.125s cubic-bezier(0.6, 0.04, 0.98, 0.335),
+                top 0.05s 0.125s linear,
+                right 0.125s 0.175s ease-in;
+    }
+  }
+  ${props => props.active && css`
+    ${HamburgerInner}{
+      transition-delay: 0s;
+      transition-timing-function: ease-out;
+      background-color: transparent !important;
+      &::before {
+        left: ${hamburgerlayerwidth * -2}px;
+        top: ${hamburgerlayerwidth * -2}px;
+        transform: translate3d(${hamburgerlayerwidth * 2}px, ${hamburgerlayerwidth * 2}px, 0) rotate(45deg);
+        transition: left 0.125s ease-out,
+                    top 0.05s 0.125s linear,
+                    transform 0.125s 0.175s cubic-bezier(0.075, 0.82, 0.165, 1);
+      }
+      &::after {
+        right: ${hamburgerlayerwidth * -2}px;
+        top: ${hamburgerlayerwidth * -2}px;
+        transform: translate3d(${hamburgerlayerwidth * -2}px, ${hamburgerlayerwidth * 2}px, 0) rotate(-45deg);
+        transition: right 0.125s ease-out,
+                    top 0.05s 0.125s linear,
+                    transform 0.125s 0.175s cubic-bezier(0.075, 0.82, 0.165, 1);
+      }
+    }
+  `}
+  
+`
+
+const Minus = styled(Hamburger)`
+  ${HamburgerInner}{
+    &::before,
+    &::after {
+      transition: bottom 0.08s 0s ease-out,
+                  top 0.08s 0s ease-out,
+                  opacity 0s linear;
+    }
+  }
+  ${props => props.active && css`
+    ${HamburgerInner}{
+      &::before,
+      &::after {
+        opacity: 0;
+        transition: bottom 0.08s ease-out,
+                    top 0.08s ease-out,
+                    opacity 0s 0.08s linear;
+      }
+      &::before {
+        top: 0;
+      }
+      
+      &::after {
+        bottom: 0;
+      }
+    }
+  `}
+`
+
+export const HamburgerTypes = {
+  Arrow,
+  ArrowAlt,
+  ArrowTurn,
+  Slider,
+  Spin,
+  Elastic,
+  Stand,
+  Emphatic,
+  Minus
+}
