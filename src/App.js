@@ -1,13 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Header from './Pruebas/stickyElement'
+// import Colorpicker from './Components/ColorPicker/Colorpicker'
+import HamburgerButton from './Components/HamburguerMenu/HamburgerButton'
 
 function App () {
+  const [showSomething, setShowSomething] = useState(false)
+  const handleClick = () => setShowSomething(!showSomething)
   return (
     <>
       <h2>hola que hace</h2>
       <p>yo nada y tu</p>
       <Header />
-      <div style={{ paddingTop:'20px' }}>
+      <div style={{ paddingTop: '20px' }}>
+        <div>
+          <HamburgerButton color='purple' type='Arrow' onClick={handleClick} />
+          {
+            showSomething &&
+            <h1 style={{ backgroundColor: 'red' }}>Esto es lo que muestra al presionar el boton</h1>
+          }
+        </div>
         <p>algo de texto</p>
         <p>forzoso para probar</p>
         <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset

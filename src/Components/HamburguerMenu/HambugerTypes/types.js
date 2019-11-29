@@ -33,7 +33,6 @@ const ArrowAlt = styled(Hamburger)`
   `}
 `
 
-
 const ArrowTurn = styled(Hamburger)`
   ${props => props.active && css`
     ${HamburgerInner}{
@@ -48,7 +47,6 @@ const ArrowTurn = styled(Hamburger)`
   `}
 `
 
-
 const Arrow = styled(Hamburger)`
   ${props => props.active && css`
     ${HamburgerInner}{
@@ -61,7 +59,6 @@ const Arrow = styled(Hamburger)`
       }
   `}
 `
-
 
 const Slider = styled(Hamburger)`
   ${HamburgerInner}{
@@ -89,6 +86,7 @@ const Slider = styled(Hamburger)`
       }
   `}
 `
+
 const Spin = styled(Hamburger)`
   ${HamburgerInner}{
     transition-duration: 0.22s;
@@ -123,4 +121,78 @@ const Spin = styled(Hamburger)`
   `}
 `
 
-export { Arrow, ArrowAlt, ArrowTurn, Slider, Spin }
+const Elastic = styled(Hamburger)`
+  ${HamburgerInner}{
+    top: ${hamburgerlayerheight / 2}px;
+    transition-duration: 0.275s;
+    transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    &::before {
+      top: ${hamburgerlayerheight + hamburgerlayerspacing}px;
+      transition: opacity 0.125s 0.275s ease;
+    }
+    
+    &::after {
+      top: ${(hamburgerlayerheight * 2) + (hamburgerlayerspacing * 2)}px;
+      transition: transform 0.275s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+  }
+  ${props => props.active && css`
+    ${HamburgerInner}{
+        transform: translate3d(0, ${hamburgerlayerspacing + hamburgerlayerheight}px, 0) rotate(135deg);
+        transition-delay: 0.075s;
+
+        &::before {
+          transition-delay: 0s;
+          opacity: 0;
+        }
+
+        &::after {
+          transform: translate3d(0, ${(hamburgerlayerspacing + hamburgerlayerheight)* -2}px, 0) rotate(-270deg);
+          transition-delay: 0.075s;
+        }
+    }
+  `}
+`
+
+
+const Stand = styled(Hamburger)`
+  ${HamburgerInner}{
+    transition: transform 0.075s 0.15s cubic-bezier(0.55, 0.055, 0.675, 0.19),
+                background-color 0s 0.075s linear;
+    
+    &::before {
+    transition: top 0.075s 0.075s ease-in,
+                transform 0.075s 0s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+    
+    &::after {
+    transition: bottom 0.075s 0.075s ease-in,
+                transform 0.075s 0s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+  }
+  ${props => props.active && css`
+    ${HamburgerInner}{
+      transform: rotate(90deg);
+        background-color: transparent !important;
+
+        transition: transform 0.075s 0s cubic-bezier(0.215, 0.61, 0.355, 1),
+                    background-color 0s 0.15s linear;
+
+        &::before {
+          top: 0;
+          transform: rotate(-45deg);
+          transition: top 0.075s 0.1s ease-out,
+                      transform 0.075s 0.15s cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+
+        &::after {
+          bottom: 0;
+          transform: rotate(45deg);
+          transition: bottom 0.075s 0.1s ease-out,
+                      transform 0.075s 0.15s cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+      }  
+  `}
+`
+export { Arrow, ArrowAlt, ArrowTurn, Slider, Spin, Elastic, Stand }

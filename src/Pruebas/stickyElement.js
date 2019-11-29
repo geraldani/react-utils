@@ -1,6 +1,5 @@
 import React from 'react'
 import StickyElementWithHooks from '../Components/Sticky/StickyElementHooks'
-import HamburgerButton from '../Components/HamburguerMenu/HamburgerButton'
 
 const Header = () => (
   <StickyElementWithHooks>
@@ -15,7 +14,6 @@ const Header = () => (
       paddingBottom: '10px',
     }}>
       Sticky Element
-      <HamburgerButton color='yellow' type='spin' onClick={()=>console.log('hice click')}/>
     </div>
   </StickyElementWithHooks>
 )

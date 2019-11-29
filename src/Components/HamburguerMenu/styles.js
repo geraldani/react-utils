@@ -13,7 +13,7 @@ const hamburgeractivehoveropacity = hamburgerhoveropacity
 const hamburgerhoverusefilter = false
 const hamburgerhoverfilter = 'opacity(50%) '
 const hamburgeractivehoverfilter = hamburgerhoverfilter
-const hamburgerAnimationDuration = '200ms'
+const hamburgerAnimationDuration = '100ms'
 
 const HamburgerInner = styled.div`
   display: block;

@@ -1,13 +1,17 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import { HamburgerBox, HamburgerInner } from './styles'
-import { ArrowAlt, ArrowTurn, Arrow, Slider, Spin } from './HambugerTypes/types'
+import { ArrowAlt, ArrowTurn, Arrow, Slider, Spin, Elastic, Stand } from './HambugerTypes/types'
+
+const Elements = { ArrowAlt, ArrowTurn, Arrow, Slider, Spin, Elastic, Stand }
 
 const HamburgerButton = (props) => {
   const [closeButton, setCloseButton] = useState(false)
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    if (e) e.preventDefault()
     setCloseButton(!closeButton)
-    if (props.onClick !== undefined) {
+    if (props.onClick) {
       props.onClick()
     }
   }
@@ -22,28 +26,16 @@ const HamburgerButton = (props) => {
 }
 
 const Hamburger = (props) => {
-  let Wrapper
-  switch (props.type) {
-    case 'arrow':
-      Wrapper = Arrow
-      break
-    case 'arrowAlt':
-      Wrapper = ArrowAlt
-      break
-    case 'arrowTurn':
-      Wrapper = ArrowTurn
-      break
-    case 'slider':
-      Wrapper = Slider
-      break
-    case 'spin':
-      Wrapper = Spin
-      break
-    default:
-      Wrapper = Slider
-      break
-  }
+  let Wrapper = Slider
+  Object.keys(Elements).forEach(e => {
+    if (props.type === e) Wrapper = Elements[e]
+  })
+
   return <Wrapper {...props}>{props.children}</Wrapper>
+}
+
+HamburgerButton.propTypes = {
+  type: PropTypes.oneOf(Object.keys(Elements).map(e => e))
 }
 
 export default HamburgerButton
