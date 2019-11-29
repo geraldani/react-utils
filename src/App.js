@@ -13,7 +13,7 @@ function App () {
       <Header />
       <div style={{ paddingTop: '20px' }}>
         <div>
-          <HamburgerButton color='purple' type='Emphatic' onClick={handleClick} />
+          <HamburgerButton color='purple' type='Arrow' width={20} onClick={handleClick} />
           {
             showSomething &&
             <h1 style={{ backgroundColor: 'red' }}>Esto es lo que muestra al presionar el boton</h1>
