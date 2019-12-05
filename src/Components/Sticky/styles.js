@@ -1,19 +1,19 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-const style = {
-  div: styled.div`
-    &.shadow{
-      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
-    }
-    &.sticky{
-      position: fixed;
-      top: 0;
-      width: 100%
-    }
-    &.sticky + * {
-      padding-top: ${ ({ heightElement, spaceNextElement }) => (heightElement+spaceNextElement)+'px' }!important;
+const sticky = css`
+  position: fixed;
+  top: 0;
+  width: 100%;
+  & + * {
+    padding-top: ${props => (props.height + props.space) + 'px'}!important;
   }
+ 
+ 
 `
-}
 
-export default style
+export const StyledContainer = styled.div`
+  &.shadow{
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+  }
+  ${props => props.sticky && sticky};
+`
