@@ -12,5 +12,5 @@ export const StyledSticky = styled(StickyElementWithHooks)`
   padding-bottom: 10px;
   border: solid 2px gray;
   margin-bottom: 2em;
-  margin-top: 10px;
+  margin-top: 16px;
 `

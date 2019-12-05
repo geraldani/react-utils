@@ -1,12 +1,12 @@
 import styled, { css } from 'styled-components'
 
-const hamburgerpaddingx = 15
-const hamburgerpaddingy = 15
-let hamburgerlayerwidth = 20
+const hamburgerpaddingx = 2
+const hamburgerpaddingy = 2
+let hamburgerlayerwidth = 30
 const hamburgerlayerheight = 3
 const hamburgerlayerspacing = 4
 const hamburgerlayercolor = '#fff'
-const hamburgerlayerborderradius = 8
+const hamburgerlayerborderradius = 10
 const hamburgerhoveropacity = 0.5
 const hamburgeractivelayercolor = hamburgerlayercolor
 const hamburgeractivehoveropacity = hamburgerhoveropacity
@@ -22,7 +22,7 @@ const HamburgerInner = styled.div`
   &,
   &::before,
   &::after {  
-    width: ${props => props.width || hamburgerlayerwidth}px;
+    width: ${hamburgerlayerwidth}px;
     height: ${hamburgerlayerheight}px;
     background-color: ${props => props.color};
     border-radius: ${hamburgerlayerborderradius}px;
@@ -46,7 +46,7 @@ const HamburgerInner = styled.div`
 `
 
 const HamburgerBox = styled.div`
-  width: ${props => props.width || hamburgerlayerwidth}px;
+  width: ${hamburgerlayerwidth}px;
   height: ${hamburgerlayerheight * 3 + hamburgerlayerspacing * 2}px;
   display: inline-block;
   position: relative;

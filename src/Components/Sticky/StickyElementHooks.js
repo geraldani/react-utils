@@ -1,12 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { StyledContainer } from './styles'
-
-const totalHeight = (elem) => { // retorna el alto total de un elemento del DOM
-  const styles = window.getComputedStyle(elem) //obtengo los estilos del elemento sticky (para sumar los margenes)
-  console.log('margintop ', styles.marginTop)
-  const top = parseFloat(styles.marginTop)
-  return (elem.offsetHeight + parseFloat(styles.marginBottom) + top - (top > 7 ? 10 : 0))//al alto del elemento que es el offsetHeigh (incluye los bordes) le sumo los margenes que pueda tener
-}
+import {totalHeight} from '../utils/Utils'
 
 const totalBox = (elem) => {// retorna la suma del borde, margen y padding de un elemento del DOM
   const styles = elem ? window.getComputedStyle(elem) : '' //obtengo los estilos de ese elemento siguiente

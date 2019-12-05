@@ -11,11 +11,11 @@ const HamburgerButton = (props) => {
     setCloseButton(!closeButton)
     if (props.onClick) props.onClick()
   }
-  const utilProps = { width: props.width, type: props.type}
+  // const commonProps = { width: props.width, type: props.type }
   return (
-    <Hamburger onClick={handleClick} active={closeButton} {...utilProps}>
-      <HamburgerBox {...utilProps}>
-        <HamburgerInner color={props.color || '#000'} {...utilProps} />
+    <Hamburger onClick={handleClick} active={closeButton} type={props.type}>
+      <HamburgerBox>
+        <HamburgerInner color={props.color || '#000'} />
       </HamburgerBox>
     </Hamburger>
   )
@@ -30,7 +30,9 @@ const Hamburger = (props) => {
 }
 
 HamburgerButton.propTypes = {
-  type: PropTypes.oneOf(Object.keys(HamburgerTypes).map(e => e))
+  type: PropTypes.oneOf(Object.keys(HamburgerTypes).map(e => e)),
+  color: PropTypes.string,
+  onClick: PropTypes.func
 }
 
 export default HamburgerButton

@@ -52,10 +52,10 @@ const Arrow = styled(Hamburger)`
   ${props => props.active && css`
     ${HamburgerInner}{
         &::before{
-          transform: translate3d(${hamburgerlayerwidth * -0.3}px, -2px, 0) rotate(-45deg) scale(0.6, 1);
+          transform: translate3d(${hamburgerlayerwidth * -0.2}px, 0, 0) rotate(-45deg) scale(0.7, 1);
         }
         &::after{
-          transform: translate3d(${hamburgerlayerwidth * -0.3}px, 2px, 0) rotate(45deg) scale(0.6, 1);
+           transform: translate3d(${hamburgerlayerwidth * -0.2}px, 0, 0) rotate(45deg) scale(0.7, 1);
         }
       }
   `}
