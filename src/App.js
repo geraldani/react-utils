@@ -4,7 +4,7 @@ import Hamburguers from './View/hamburger'
 
 function App () {
   return (
-    <div className='p-4'>
+    <div className='p-4 m-4 border'>
       <Hamburguers/>
       <Sticky />
       {[...Array(20)].map(() => <h1>Hola que hace</h1>)}

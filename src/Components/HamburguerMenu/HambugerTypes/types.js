@@ -5,7 +5,7 @@ import {
   hamburgerlayerwidth,
   hamburgerlayerheight,
   hamburgerAnimationDuration,
-  hamburgerlayerspacing
+  hamburgerlayerspacing, HamburgerBox
 } from '../styles'
 
 
@@ -264,6 +264,36 @@ const Minus = styled(Hamburger)`
   `}
 `
 
+const ThreeDX = styled(Hamburger)`
+  ${HamburgerBox}{
+    perspective: ${hamburgerlayerwidth * 2}px;
+  }
+  ${HamburgerInner} {
+    transition: transform 0.15s cubic-bezier(0.645, 0.045, 0.355, 1),
+                background-color 0s 0.1s cubic-bezier(0.645, 0.045, 0.355, 1);
+    
+    &::before,
+    &::after {
+      transition: transform 0s 0.1s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+  }
+  ${props => props.active && css`
+    ${HamburgerInner}{
+      background-color: transparent !important;
+      transform: rotateY(180deg);
+
+      &::before {
+        transform: translate3d(0, ${hamburgerlayerheight + hamburgerlayerspacing}px, 0) rotate(45deg);
+      }
+
+      &::after {
+        transform: translate3d(0, ${(hamburgerlayerheight + hamburgerlayerspacing) * -1}px, 0) rotate(-45deg);
+      }
+    }
+  `}
+`
+
+
 export const HamburgerTypes = {
   Arrow,
   ArrowAlt,
@@ -273,5 +303,6 @@ export const HamburgerTypes = {
   Elastic,
   Stand,
   Emphatic,
-  Minus
+  Minus,
+  ThreeDX
 }

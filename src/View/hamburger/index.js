@@ -28,7 +28,8 @@ const Hamburguers = () => {
     'Elastic',
     'Stand',
     'Emphatic',
-    'Minus'
+    'Minus',
+    'ThreeDXa'
   ]
 
   const colors = [
@@ -40,7 +41,8 @@ const Hamburguers = () => {
     '#fbc02d',
     '#2196f3',
     '#607d8b',
-    '#43a047'
+    '#43a047',
+    '#ff5722',
   ]
 
   return (

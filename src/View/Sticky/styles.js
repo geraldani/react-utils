@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { StickyElementWithHooks } from '../../Components/Sticky/StickyElementHooks'
 
 export const StyledSticky = styled(StickyElementWithHooks)`
-  width: 100%;
+  //width: 100%;
   background-color: silver;
   display: flex;
   justify-content: center;
