@@ -1,52 +1,69 @@
-import React, { Component, createRef } from 'react'
-import style from './styles'
+import React, { useState, useRef, useEffect } from 'react'
+import { StyledContainer } from './styles'
+import { totalHeight } from '../utils/Utils'
 
-class StickyElement extends Component {
-  constructor (props) {
-    super(props)
-    this.header = createRef()
-    this.state = {
-      heightElement: 0,
-      spaceNextElement: 0
-    }
-  }
-
-  handleScroll = (top = 0) => {
-    if(window.pageYOffset > top){
-      this.header.current.classList.add('sticky')
-      this.header.current.classList.remove('shadow')
-    }else{
-      this.header.current.classList.remove('sticky')
-      this.header.current.classList.add('shadow')
-    }
-  }
-
-  componentDidMount () {
-    const nextElement = document.querySelector('#stickyContainer+*') //obtengo el elemento que le sigue al sticky
-    const elementStyle = getComputedStyle(nextElement) //obtengo los estilos de ese elemento
-    const space = parseInt(elementStyle.paddingTop) + parseInt(elementStyle.marginTop) //sumo el padding y el margin de ese elemento
-    const topHeader = this.header.current.offsetTop
-
-    this.setState({
-      heightElement: this.header.current.clientHeight,
-      spaceNextElement: space
-    })
-
-    window.addEventListener('scroll', () => this.handleScroll(topHeader))
-
-  }
-
-  componentWillUnmount () {
-    window.removeEventListener('scroll', () => this.handleScroll());
-  }
-
-  render () {
-    return (
-      <style.div id='stickyContainer' ref={this.header} {...this.state} className='shadow'>
-        {this.props.children}
-      </style.div>
-    )
-  }
+const totalBox = (elem) => {// retorna la suma del borde, margen y padding de un elemento del DOM
+  const styles = elem ? window.getComputedStyle(elem) : '' //obtengo los estilos de ese elemento siguiente
+  return (parseFloat(styles.paddingTop) + parseFloat(styles.marginTop) + parseFloat(styles.borderWidth))//sumo el padding y el margin y el border de ese elemento
 }
 
-export default StickyElement
+const totalWidth = (elem) => {// retorna un objeto con la suma del padding-x margin-x y border de un elemento asi como solo de un lado
+  const styles = elem ? window.getComputedStyle(elem) : '' //obtengo los estilos de ese elemento siguiente
+  const total =
+    parseFloat(styles.paddingLeft) +
+    parseFloat(styles.paddingRight) +
+    parseFloat(styles.marginLeft) +
+    parseFloat(styles.marginRight) +
+    (parseFloat(styles.borderWidth) * 2)
+
+  const left =
+    parseFloat(styles.paddingLeft) +
+    parseFloat(styles.marginLeft) +
+    parseFloat(styles.borderWidth)
+
+  return ({ left, total })
+}
+
+export const StickyElement = ({ children, className = '' }) => {
+  const [heightElement, setHeightElement] = useState(0)
+  const [spaceNext, setSpaceNext] = useState(0)
+  const [sticky, setSticky] = useState(false)
+  const header = useRef(null)
+
+  const handleScroll = (top = 0) => {
+    window.pageYOffset > top
+      ? setSticky(true)
+      : setSticky(false)
+  }
+
+  useEffect(() => {
+    const currentElement = header.current //el elemento en si del sticky
+    const topCurrentElement = currentElement.offsetTop // offset es la pocision en px del sticky en la ventana
+    const nextElement = currentElement.nextSibling //obtengo el elemento que le sigue al sticky
+    const spaceNextElement = totalBox(nextElement)
+    const heightCurrentElement = totalHeight(currentElement)
+    setHeightElement(heightCurrentElement)
+    setSpaceNext(spaceNextElement)
+
+    if (topCurrentElement > 0) {
+      window.onscroll = () => handleScroll(topCurrentElement)
+      return () => window.onscroll = () => {}
+      // window.addEventListener('scroll', handleScroll)
+      // return window.removeEventListener('scroll', handleScroll)
+    } else {
+      setSticky(true)
+    }
+  }, [])
+
+  const commonProps = { height: heightElement, space: spaceNext, sticky }
+
+  return (
+    <StyledContainer
+      ref={header}
+      parentWidth={header.current ? totalWidth(header.current.parentNode) : {}}
+      className={`shadow ${className}`} {...commonProps}
+    >
+      {children}
+    </StyledContainer>
+  )
+}

@@ -24,12 +24,15 @@ const Hamburguers = () => {
     'ArrowAlt',
     'ArrowTurn',
     'Slider',
+    'ThreeDX',
     'Spin',
     'Elastic',
     'Stand',
     'Emphatic',
+    'Vortex',
+    'Collapse',
+    'CollapseR',
     'Minus',
-    'ThreeDXa'
   ]
 
   const colors = [
@@ -43,12 +46,15 @@ const Hamburguers = () => {
     '#607d8b',
     '#43a047',
     '#ff5722',
+    '#a8c722',
+    '#f44336',
+    '#4a148c',
   ]
 
   return (
     <div className='d-flex flex-wrap flex-column align-items-start'>
       <h1>Hamburger buttons</h1>
-      <div className='d-flex flex-wrap justify-content-center'>
+      <div className='d-flex flex-wrap justify-content-start'>
         {
           types.map((elem, i) => (
             <StyleContainer key={elem} color={colors[i]}>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { HamburgerBox, HamburgerInner } from './styles'
-import { HamburgerTypes } from './HambugerTypes/types'
+import { HamburgerTypes } from './types'
 
 const HamburgerButton = (props) => {
   const [closeButton, setCloseButton] = useState(false)

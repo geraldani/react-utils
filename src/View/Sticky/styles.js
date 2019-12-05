@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import { StickyElementWithHooks } from '../../Components/Sticky/StickyElementHooks'
+import { StickyElement } from '../../Components/Sticky/StickyElement'
 
-export const StyledSticky = styled(StickyElementWithHooks)`
+export const StyledSticky = styled(StickyElement)`
   //width: 100%;
   background-color: silver;
   display: flex;
