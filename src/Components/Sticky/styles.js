@@ -3,7 +3,8 @@ import styled, { css } from 'styled-components'
 const sticky = css`
   position: fixed;
   top: 0;
-  width: 100%;
+  margin-top: 0!important;
+  z-index: 2500;
   & + * {
     padding-top: ${props => (props.height + props.space) + 'px'}!important;
   }

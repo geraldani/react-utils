@@ -3,8 +3,9 @@ import { StyledContainer } from './styles'
 
 const totalHeight = (elem) => { // retorna el alto total de un elemento del DOM
   const styles = window.getComputedStyle(elem) //obtengo los estilos del elemento sticky (para sumar los margenes)
-  //al alto del elemento que es el offsetHeigh (incluye los bordes) le sumo los margenes que pueda tener
-  return (elem.offsetHeight + parseFloat(styles.marginTop) + parseFloat(styles.marginBottom))
+  console.log('margintop ', styles.marginTop)
+  const top = parseFloat(styles.marginTop)
+  return (elem.offsetHeight + parseFloat(styles.marginBottom) + top - (top > 7 ? 10 : 0))//al alto del elemento que es el offsetHeigh (incluye los bordes) le sumo los margenes que pueda tener
 }
 
 const totalBox = (elem) => {// retorna la suma del borde, margen y padding de un elemento del DOM
@@ -34,20 +35,18 @@ export const StickyElementWithHooks = ({ children, className = '' }) => {
     setSpaceNext(spaceNextElement)
 
     if (topCurrentElement > 0) {
-      // window.addEventListener('scroll', handleScroll)
       window.onscroll = () => handleScroll(topCurrentElement)
-      // return window.removeEventListener('scroll', handleScroll)
       return () => window.onscroll = () => {}
+      // window.addEventListener('scroll', handleScroll)
+      // return window.removeEventListener('scroll', handleScroll)
     } else {
       setSticky(true)
     }
   }, [])
 
   const commonProps = { height: heightElement, space: spaceNext, sticky }
-
   return (
-    <StyledContainer ref={header} {...commonProps}
-                     className={`shadow ${className}`}>
+    <StyledContainer ref={header} className={`shadow ${className}`} {...commonProps}>
       {children}
     </StyledContainer>
   )

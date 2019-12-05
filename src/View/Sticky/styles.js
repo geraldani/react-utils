@@ -3,12 +3,14 @@ import { StickyElementWithHooks } from '../../Components/Sticky/StickyElementHoo
 
 export const StyledSticky = styled(StickyElementWithHooks)`
   width: 100%;
-  background-color: hotpink;
+  background-color: silver;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   padding-top: 10px;
   padding-bottom: 10px;
-  border: solid 10px black;
+  border: solid 2px gray;
   margin-bottom: 2em;
+  margin-top: 10px;
 `
